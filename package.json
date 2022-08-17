@@ -7,7 +7,7 @@
     "url": "git+https://github.com/hyeongwookimdev/wetube-reloaded.git"
   },
   "scripts": {
-    "dev": "nodemon --exec babel-node src/server.js"
+    "dev": "nodemon --exec babel-node src/init.js"
   },
   "author": "Hyeongwoo Kim<hyeongwookim.dev@gmail.com>",
   "license": "MIT",
