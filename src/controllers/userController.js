@@ -140,16 +140,20 @@ export const logout = (req, res) => {
 export const getEdit = (req, res) => {
   res.render("edit-profile", { pageTitle: "Edit Profile" });
 };
+
 export const postEdit = async (req, res) => {
   const {
     session: {
-      user: { _id },
+      user: { _id, avatarUrl },
     },
     body: { name, email, username, location },
+    file,
   } = req;
+  console.log(file);
   const updatedUser = await User.findByIdAndUpdate(
     _id,
     {
+      avatarUrl: file ? file.path : avatarUrl,
       name,
       email,
       username,
@@ -168,9 +172,6 @@ export const getChangePassword = (req, res) => {
   return res.render("users/change-password", { pageTitle: "Change Password" });
 };
 export const postChangePassword = async (req, res) => {
-  // 이렇게는 누가 비밀번호를 바꾸려는지 알 수 없으니 유저 찾아와야한다.
-  // 세션에서 id로 현재 로그인 된 유저를 확인하고
-  // body로 폼에서 작성된 데이터를 가져옴
   const {
     session: {
       user: { _id },
@@ -185,7 +186,6 @@ export const postChangePassword = async (req, res) => {
       errorMessage: "The current password is incorrect",
     });
   }
-  // 2. 입력한 비밀번호와 확인이 일치하지 않으면 다시 비번 변경화면으로 보냄
   if (newPassword !== newPasswordConfirmation) {
     return res.status(400).render("users/change-password", {
       pageTitle: "Change Password",
