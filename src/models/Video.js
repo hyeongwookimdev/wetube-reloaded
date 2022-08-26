@@ -10,6 +10,9 @@ const videoSchema = new mongoose.Schema({
     views: { type: Number, default: 0, required: true },
     rating: { type: Number, default: 0, required: true },
   },
+  owner: { type: mongoose.Schema.Types.ObjectId, required: true, ref: "User" },
+  //ref: 몽구스에게 오너에 아이디를 저장하겠다고 알려줘야 하기 때문,
+  // 그런데 모델도 여러갠데, 어떤 모델의 아이디에 연결하는지는 알려줘야지 그래서 적는 것
 });
 
 videoSchema.static("formatHashtag", function (hashtags) {
