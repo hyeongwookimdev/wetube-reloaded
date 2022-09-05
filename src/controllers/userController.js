@@ -135,6 +135,7 @@ export const finishGithubLogin = async (req, res) => {
 };
 
 export const logout = (req, res) => {
+  req.flash("info", "Bye Bye");
   req.session.destroy();
   return res.redirect("/");
 };
@@ -168,6 +169,7 @@ export const postEdit = async (req, res) => {
 
 export const getChangePassword = (req, res) => {
   if (req.session.user.socialOnly) {
+    req.flash("error", "Can't change password.");
     return res.redirect("/");
   }
   return res.render("users/change-password", { pageTitle: "Change Password" });
@@ -195,13 +197,14 @@ export const postChangePassword = async (req, res) => {
   }
   user.password = newPassword;
   await user.save();
+  req.flash("info", "Password updated");
   return res.redirect("/users/logout");
 };
 
 export const see = async (req, res) => {
   const { id } = req.params;
   const user = await User.findById(id).populate({
-    path: "videos", // 가장 먼저 populate 하고 싶은 것
+    path: "videos",
     populate: {
       path: "owner",
       model: "User",
