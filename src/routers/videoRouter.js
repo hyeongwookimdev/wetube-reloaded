@@ -25,5 +25,12 @@ videoRouter
   .route("/upload")
   .all(protectorMiddleware)
   .get(getUpload)
-  .post(videoUpload.single("video"), postUpload);
+  .post(
+    videoUpload.fields([
+      { name: "video" },
+      { name: "thumb" },
+      //name은 인풋의 name이 들어가야 함
+    ]),
+    postUpload
+  );
 export default videoRouter;
