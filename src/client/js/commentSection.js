@@ -2,6 +2,7 @@ import { async } from "regenerator-runtime";
 
 const videoContainer = document.getElementById("videoContainer");
 const form = document.getElementById("commentForm");
+const deleteBtns = document.querySelectorAll(".deleteBtn");
 
 const addComment = (text, id) => {
   const videoComments = document.querySelector(".video__comments ul");
@@ -12,11 +13,11 @@ const addComment = (text, id) => {
   icon.className = "fas fa-comment";
   const span = document.createElement("span");
   span.innerText = `${text}`;
-  const span2 = document.createElement("span");
-  span2.innerText = "❌";
+  const button = document.createElement("button");
+  button.innerText = "❌";
   newComment.appendChild(icon);
   newComment.appendChild(span);
-  newComment.appendChild(span2);
+  newComment.appendChild(button);
   videoComments.prepend(newComment);
 };
 
@@ -42,6 +43,20 @@ const handleSubmit = async (event) => {
   }
 };
 
+const handleDeleteBtnClick = () => {
+  const comment = document.querySelector(".video__comment");
+  const commentId = comment.dataset.id;
+  fetch(`/api/comments/${commentId}`, {
+    method: "DELETE",
+  });
+  const videoComments = document.querySelector(".video__comments ul");
+  videoComments.removeChild(comment);
+};
+
 if (form) {
   form.addEventListener("submit", handleSubmit);
+}
+
+for (const deleteBtn of deleteBtns) {
+  deleteBtn.addEventListener("click", handleDeleteBtnClick);
 }
