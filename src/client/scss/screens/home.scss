@@ -1,2 +1,62 @@
-.video__grid {
+.welcome {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 30px;
+  padding: 0px 20px;
+  .welcome__logo {
+    width: 45%;
+    img {
+      width: 100%;
+      margin-bottom: 10px;
+    }
+  }
+  .welcome__guide {
+    width: 45%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    img {
+      width: 100%;
+      margin-bottom: 20px;
+    }
+    .welcome__notice {
+      background-color: #f7f7ef;
+      color: #827257;
+      display: flex;
+      flex-direction: column;
+      width: 500px;
+      height: 400px;
+      border: 7px solid #ffda04;
+      border-radius: 10px;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      font-size: 25px;
+      span {
+        margin-bottom: 10px;
+      }
+
+      .welcome__notice__photo {
+        height: 50%;
+        display: flex;
+        justify-content: center;
+        img {
+          width: 22%;
+          padding: 5px 20px;
+        }
+      }
+
+      .welcome__btn {
+        display: flex;
+        a {
+          background-color: #827257;
+          color: white;
+          margin: 0px 5px;
+          padding: 10px 15px;
+          border-radius: 10px;
+        }
+      }
+    }
+  }
 }

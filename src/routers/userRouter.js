@@ -8,6 +8,8 @@ import {
   finishGithubLogin,
   getChangePassword,
   postChangePassword,
+  startKakaoLogin,
+  finishKakaoLogin,
 } from "../controllers/userController";
 import {
   protectorMiddleware,
@@ -30,6 +32,8 @@ userRouter
   .post(postChangePassword);
 userRouter.get("/github/start", publicOnlyMiddleware, startGithubLogin);
 userRouter.get("/github/finish", publicOnlyMiddleware, finishGithubLogin);
+userRouter.get("/kakao/start", startKakaoLogin);
+userRouter.get("/kakao/finish", finishKakaoLogin);
 userRouter.get("/:id", see);
 
 export default userRouter;

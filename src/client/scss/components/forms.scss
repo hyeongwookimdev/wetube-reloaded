@@ -1,45 +1,45 @@
 form {
   max-width: 420px;
   margin: 0 auto;
+  color: #827257;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   &:not(.search__form) {
     padding: 30px;
-    background-color: rgba($color: $bg, $alpha: 0.7);
+    background-color: #ffeab3;
     border-radius: 10px;
-    border: 1px solid rgba($color: #fff, $alpha: 0.1);
   }
 }
 
-input:not(input[type="range"]),
+input:not(input[type="range"], input[type="submit"]) {
+  all: unset;
+  padding: 15px 20px;
+  border-radius: 5px;
+  border: 7px solid #88c9a1;
+  background-color: #f7f7ef;
+  margin-bottom: 5px;
+  font-size: 16px;
+  color: #483c23;
+  width: 90%;
+  &::placeholder {
+    color: #827257;
+  }
+}
 input[type="submit"] {
   all: unset;
   padding: 15px 20px;
   border-radius: 5px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  background-color: black;
+  border: 7px solid #827257;
+  background-color: #827257;
+  box-shadow: 0px 6px #483c23;
   margin-bottom: 5px;
   font-size: 16px;
-  color: white;
+  color: #f7f7ef;
   width: 90%;
   &::placeholder {
-    color: rgba(255, 255, 255, 0.7);
+    color: #827257;
   }
-}
 
-input[type="submit"],
-.social__btn {
-  border-radius: 5px;
-  padding: 12px 20px;
-  background-color: white !important;
-  color: rgba($color: $red, $alpha: 1) !important;
-  text-align: center !important;
-  cursor: pointer;
-  display: block;
-  border: none;
-  &:focus {
-    outline: none;
-  }
-  &:disabled {
-    opacity: 0.5;
-    pointer-events: none;
-  }
+  text-align: center;
 }

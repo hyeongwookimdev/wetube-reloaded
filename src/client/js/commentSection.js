@@ -41,15 +41,17 @@ const handleSubmit = async (event) => {
   });
   if (response.status === 201) {
     textarea.value = "";
-    const { newCommentId } = await response.json();
-    addComment(text, newCommentId);
+    const { newCommentId, newCommentUsername, newCommentAvatarUrl } =
+      await response.json();
+    console.log(newCommentId, newCommentUsername, newCommentAvatarUrl);
+    addComment(text, newCommentId, newCommentUsername, newCommentAvatarUrl);
   }
 };
 
 const handleDeleteBtnClick = (event) => {
   const comment = event.srcElement.parentNode;
   const commentId = comment.dataset.id;
-  console.log(commentId);
+  console.log(comment);
   fetch(`/api/comments/${commentId}`, {
     method: "DELETE",
   });

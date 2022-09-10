@@ -3,6 +3,7 @@ import Video from "../models/Video";
 import fetch from "cross-fetch";
 import bcrypt from "bcrypt";
 import { response } from "express";
+import { async } from "regenerator-runtime";
 
 export const getJoin = (req, res) => res.render("join", { pageTitle: "Join" });
 export const postJoin = async (req, res) => {
@@ -29,6 +30,10 @@ export const postJoin = async (req, res) => {
       password,
       location,
     });
+    req.flash(
+      "success",
+      "회원 가입을 축하드립니다! 가입한 정보로 로그인해주세요!"
+    );
     return res.redirect("/login");
   } catch (error) {
     console.log(error);
@@ -60,6 +65,7 @@ export const postLogin = async (req, res) => {
   }
   req.session.loggedIn = true;
   req.session.user = user;
+
   return res.redirect("/");
 };
 
@@ -74,6 +80,7 @@ export const startGithubLogin = (req, res) => {
   const finalUrl = `${baseUrl}?${params}`;
   return res.redirect(finalUrl);
 };
+
 export const finishGithubLogin = async (req, res) => {
   const baseUrl = "https://github.com/login/oauth/access_token";
   const config = {
@@ -126,6 +133,64 @@ export const finishGithubLogin = async (req, res) => {
         location: userData.location,
       });
     }
+    req.session.loggedIn = true;
+    req.session.user = user;
+    return res.redirect("/");
+  } else {
+    return res.redirect("/login");
+  }
+};
+
+export const startKakaoLogin = (req, res) => {
+  const baseUrl = "https://kauth.kakao.com/oauth/authorize";
+  const config = {
+    response_type: "code",
+    client_id: process.env.KA_CLIENT,
+    redirect_uri: "http://localhost:4000/users/kakao/finish",
+    scope: "openid",
+  };
+  const params = new URLSearchParams(config).toString();
+  const finalUrl = `${baseUrl}?${params}`;
+  return res.redirect(finalUrl);
+};
+
+export const finishKakaoLogin = async (req, res) => {
+  const baseUrl = "https://kauth.kakao.com/oauth/token";
+  const config = {
+    grant_type: "authorization_code",
+    client_id: process.env.KA_CLIENT,
+    redirect_uri: "http://localhost:4000/users/kakao/finish",
+    code: req.query.code,
+    client_secret: process.env.KA_SECRET,
+  };
+  const params = new URLSearchParams(config).toString();
+  const finalUrl = `${baseUrl}?${params}`;
+  const tokenRequest = await (
+    await fetch(finalUrl, {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+      },
+    })
+  ).json();
+  if ("access_token" in tokenRequest) {
+    const { access_token } = tokenRequest;
+    const userData = await (
+      await fetch("https://kapi.kakao.com/v2/user/me", {
+        headers: { Authorization: `Bearer ${access_token}` },
+      })
+    ).json();
+    const kakaoImage = userData.properties.profile_image;
+    const userAvatar = kakaoImage.replace("/", "");
+    const user = await User.create({
+      avatarUrl: userAvatar,
+      name: userData.properties.nickname,
+      email: "",
+      username: userData.id,
+      password: "",
+      socialOnly: true,
+      location: "",
+    });
     req.session.loggedIn = true;
     req.session.user = user;
     return res.redirect("/");
@@ -213,8 +278,11 @@ export const see = async (req, res) => {
   if (!user) {
     return res.status(404).render("404", { pageTitle: "User not found" });
   }
+  console.log(user);
   return res.render("users/profile", {
     pageTitle: user.name,
     user,
   });
 };
+
+export const guide = (req, res) => res.render("guide");

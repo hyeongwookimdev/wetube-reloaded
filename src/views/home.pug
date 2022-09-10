@@ -2,8 +2,25 @@ extends base
 include mixins/video
 
 block content 
+  div.welcome
+    div.welcome__logo
+      img(src="uploads/logo.png", alt="")
+      img(src="uploads/enter_Photo.png")
+    div.welcome__guide
+      img(src="uploads/newlife.png")
+      div.welcome__notice
+        span 무인도 이주 패키지 참가자를 모집합니다!
+        span 패키지에 참여하고 새로운 생활을 함께해요!
+        div.welcome__notice__photo
+          img(src="uploads/yeoul.png")
+          img(src="uploads/person.png")
+        div.welcome__btn
+          a(href="") 패키지 참가
+          a(href="") 참가자 로그인
   div.video-grid
     each x in videos
+      +video(x)
+      +video(x)
       +video(x)
     else
       span.empty__message No videos found
