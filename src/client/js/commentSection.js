@@ -13,9 +13,9 @@ const addComment = (text, id, username, avatarUrl) => {
   top.className = "video__comment__top";
   const img = document.createElement("img");
   if (avatarUrl) {
-    img.src = `/${avatarUrl}`;
+    img.src = `${avatarUrl}`;
   } else {
-    img.src = "/uploads/default.png";
+    img.src = "/img/default.png";
   }
   const info = document.createElement("div");
   info.className = "video__comment__info";
