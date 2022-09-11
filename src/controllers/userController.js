@@ -146,7 +146,7 @@ export const startKakaoLogin = (req, res) => {
   const config = {
     response_type: "code",
     client_id: process.env.KA_CLIENT,
-    redirect_uri: "http://localhost:4000/users/kakao/finish",
+    redirect_uri: "https://wetube-hyeongwoo.herokuapp.com/users/kakao/finish",
     scope: "openid",
   };
   const params = new URLSearchParams(config).toString();
@@ -159,7 +159,7 @@ export const finishKakaoLogin = async (req, res) => {
   const config = {
     grant_type: "authorization_code",
     client_id: process.env.KA_CLIENT,
-    redirect_uri: "http://localhost:4000/users/kakao/finish",
+    redirect_uri: "https://wetube-hyeongwoo.herokuapp.com/users/kakao/finish",
     code: req.query.code,
     client_secret: process.env.KA_SECRET,
   };
