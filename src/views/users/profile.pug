@@ -8,8 +8,10 @@ block content
     else
       if isHeroku
         img(src=user.avatarUrl).avatar
+      else if user.socialOnly
+        img(src=user.avatarUrl).avatar
       else
-        img(src= "/" + user.avatarUrl).avatar
+        img(src=`/${user.avatarUrl}`).avatar
     h3=user.name
   div.video-grid
     each x in user.videos

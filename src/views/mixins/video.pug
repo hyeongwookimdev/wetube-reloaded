@@ -4,7 +4,7 @@ mixin video(video)
     div.video-mixin__thumb(style=`background-image:url(/${video.thumbUrl});background-size:cover;background-position:center`)
     div.video-mixin__info
       if video.owner.avatarUrl
-        img(src=`/${video.owner.avatarUrl}`, alt="")
+        img(src=`${video.owner.avatarUrl}`, alt="")
       else
         img(src="/uploads/default.png")
       div.video-mixin__data

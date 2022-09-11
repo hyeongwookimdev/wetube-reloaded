@@ -34,7 +34,7 @@ block content
         div.video__owner 
           a(href=`/users/${video.owner._id}`)
             if video.owner.avatarUrl
-              img(src=`/${video.owner.avatarUrl}`, alt="")
+              img(src=`${video.owner.avatarUrl}`, alt="")
             else
               img(src="/uploads/default.png")
             span=video.owner.name
@@ -57,6 +57,8 @@ block content
                 li.video__comment(data-id=comment._id)
                   div.video__comment__top                      
                     if comment.avatarUrl
+                      img(src=`${comment.avatarUrl}`, alt="")
+                    else if comment.avatarUrl.includes("github")
                       img(src=`/${comment.avatarUrl}`, alt="")
                     else
                       img(src="/uploads/default.png")

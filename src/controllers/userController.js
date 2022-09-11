@@ -181,9 +181,8 @@ export const finishKakaoLogin = async (req, res) => {
       })
     ).json();
     const kakaoImage = userData.properties.profile_image;
-    const userAvatar = kakaoImage.replace("/", "");
     const user = await User.create({
-      avatarUrl: userAvatar,
+      avatarUrl: kakaoImage,
       name: userData.properties.nickname,
       email: "",
       username: userData.id,

@@ -18,14 +18,11 @@ header
           a(href=`/users/${loggedInUser._id}`)
             if loggedInUser.avatarUrl === undefined
               img.header__avatar(src="/uploads/default.png")
-            else 
-              if loggedInUser.socialOnly.toString().includes("github")
-                img.header__avatar(src=loggedInUser.avatarUrl)
-              else 
-                if isHreoku
-                  img.header__avatar(src=loggedInUser.avatarUrl)
-                else
-                  img.header__avatar(src= "/" + loggedInUser.avatarUrl)
+            else if loggedInUser.socialOnly
+              img.header__avatar(src=loggedInUser.avatarUrl)
+            else
+              img.header__avatar(src=`/${loggedInUser.avatarUrl}`)
+              
       else 
         li 
           a(href="/login") Login
