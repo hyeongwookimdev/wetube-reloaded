@@ -183,9 +183,9 @@ export const finishKakaoLogin = async (req, res) => {
     const kakaoImage = userData.properties.profile_image;
     const user = await User.create({
       avatarUrl: kakaoImage,
-      name: userData.properties.nickname,
+      name: userData.id,
       email: "",
-      username: userData.id,
+      username: userData.properties.nickname,
       password: "",
       socialOnly: true,
       location: "",
