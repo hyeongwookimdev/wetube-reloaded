@@ -13,7 +13,7 @@ const addComment = (text, id, username, avatarUrl) => {
   top.className = "video__comment__top";
   const img = document.createElement("img");
   if (avatarUrl) {
-    img.src = `${avatarUrl.replace("/", "")}`;
+    img.src = `${avatarUrl}`;
   } else {
     img.src = "/img/default.png";
   }
