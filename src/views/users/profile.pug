@@ -7,7 +7,7 @@ block content
       img.avatar(src="/img/default.png")
     else
       img(src=`${user.avatarUrl}`).avatar
-    h3=user.name
+    h3=user.username
   div.video-grid
     each x in user.videos
       +video(x)

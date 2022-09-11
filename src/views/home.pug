@@ -10,7 +10,7 @@ block content
       img(src="img/newlife.png")
       div.welcome__notice
         if loggedIn
-          span= `어서와요! ${loggedInUser.name}!`
+          span= `어서와요! ${loggedInUser.username}!`
           span 오늘도 즐거운 시간 되세요!
           img(src="img/loggedIn_img.png").loggedIn
         else
