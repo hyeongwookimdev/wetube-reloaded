@@ -4,21 +4,21 @@ include mixins/video
 block content 
   div.welcome
     div.welcome__logo
-      img(src="uploads/logo.png")
-      img(src="uploads/enter_Photo.png")
+      img(src="img/logo.png")
+      img(src="img/enter_Photo.png")
     div.welcome__guide
-      img(src="uploads/newlife.png")
+      img(src="img/newlife.png")
       div.welcome__notice
         if loggedIn
           span= `어서와요! ${loggedInUser.name}!`
           span 오늘도 즐거운 시간 되세요!
-          img(src="uploads/loggedIn_img.png").loggedIn
+          img(src="img/loggedIn_img.png").loggedIn
         else
           span 무인도 이주 패키지 참가자를 모집합니다!
           span 패키지에 참여하고 새로운 생활을 함께해요!
           div.welcome__notice__photo
-            img(src="uploads/yeoul.png")
-            img(src="uploads/person.png")
+            img(src="img/yeoul.png")
+            img(src="img/person.png")
           div.welcome__btn
             a(href="/join") 패키지 참가
             a(href="/login") 참가자 로그인

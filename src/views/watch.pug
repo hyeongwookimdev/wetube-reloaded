@@ -33,10 +33,13 @@ block content
         dic.video__desc=video.description
         div.video__owner 
           a(href=`/users/${video.owner._id}`)
-            if video.owner.avatarUrl
-              img(src=`${video.owner.avatarUrl}`, alt="")
+
+            if video.owner.avatarUrl === undefined
+              img(src="/img/default.png")
             else
-              img(src="/uploads/default.png")
+              img(src=`${video.owner.avatarUrl}`, alt="")
+        
+
             span=video.owner.name
         if String(video.owner._id) === String(loggedInUser._id)
           a(href=`${video.id}/edit`) Edit Video &rarr;
@@ -55,13 +58,14 @@ block content
             ul 
               each comment in video.comments.reverse()
                 li.video__comment(data-id=comment._id)
-                  div.video__comment__top                      
-                    if comment.avatarUrl
-                      img(src=`${comment.avatarUrl}`, alt="")
-                    else if comment.avatarUrl.includes("github")
-                      img(src=`/${comment.avatarUrl}`, alt="")
+                  div.video__comment__top
+
+                    if comment.avatarUrl === undefined
+                      img(src="/img/default.png")
                     else
-                      img(src="/uploads/default.png")
+                      img(src=`${comment.avatarUrl}`, alt="")
+                   
+
                     div.video__comment__info
                       span=comment.username
                       span.date=new Date(comment.createdAt).toLocaleDateString("ko-kr", {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'})
