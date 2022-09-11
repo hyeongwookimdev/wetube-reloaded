@@ -4,19 +4,38 @@ const videoContainer = document.getElementById("videoContainer");
 const form = document.getElementById("commentForm");
 const deleteBtns = document.querySelectorAll(".deleteBtn");
 
-const addComment = (text, id) => {
+const addComment = (text, id, username, avatarUrl) => {
   const videoComments = document.querySelector(".video__comments ul");
   const newComment = document.createElement("li");
   newComment.dataset.id = id;
   newComment.className = "video__comment";
-  const icon = document.createElement("i");
-  icon.className = "fas fa-comment";
-  const span = document.createElement("span");
-  span.innerText = `${text}`;
+  const top = document.createElement("div");
+  top.className = "video__comment__top";
+  const img = document.createElement("img");
+  if (avatarUrl) {
+    img.src = `/${avatarUrl}`;
+  } else {
+    img.src = "/uploads/default.png";
+  }
+  const info = document.createElement("div");
+  info.className = "video__comment__info";
+  const spanUsername = document.createElement("span");
+  spanUsername.innerText = `${username}`;
+  const date = document.createElement("span");
+  date.className = "date";
+  date.innerText = "방금 전";
+  const spanText = document.createElement("span");
+  spanText.innerText = `${text}`;
   const button = document.createElement("button");
+  button.className = "deleteBtn";
   button.innerText = "❌";
-  newComment.appendChild(icon);
-  newComment.appendChild(span);
+
+  info.appendChild(spanUsername);
+  info.appendChild(date);
+  top.appendChild(img);
+  top.appendChild(info);
+  newComment.appendChild(top);
+  newComment.appendChild(spanText);
   newComment.appendChild(button);
   videoComments.prepend(newComment);
   button.addEventListener("click", (event) => {

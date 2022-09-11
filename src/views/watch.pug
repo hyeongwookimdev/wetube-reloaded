@@ -30,34 +30,42 @@ block content
           div.video__rating #{video.meta.rating}회
           i.fa-regular.fa-clock
           div.video__createdAt=new Date(video.createdAt).toLocaleDateString("ko-kr", {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'})
+        dic.video__desc=video.description
         div.video__owner 
           a(href=`/users/${video.owner._id}`)
-            img(src=`/${video.owner.avatarUrl}`, alt="")
+            if video.owner.avatarUrl
+              img(src=`/${video.owner.avatarUrl}`, alt="")
+            else
+              img(src="/uploads/default.png")
             span=video.owner.name
         if String(video.owner._id) === String(loggedInUser._id)
           a(href=`${video.id}/edit`) Edit Video &rarr;
           br
           a(href=`${video.id}/delete`) Delete Video &rarr;
     div.video__comment-area
-      if loggedIn
-        div.video__add-comments
-          form.video__comment-form#commentForm
+      div.video__add-comments
+        form.video__comment-form#commentForm
+          if loggedIn
             div.video__comment-input
               textarea(cols="20", rows="5", placeholder="write a nice comment...")
               button Add Comment
-            div.video__comments
-              ul 
-                each comment in video.comments.reverse()
-                  li.video__comment(data-id=comment._id)
-                    div.video__comment__top                      
+          else
+            span 댓글을 남기려면 로그인이 필요합니다!
+          div.video__comments
+            ul 
+              each comment in video.comments.reverse()
+                li.video__comment(data-id=comment._id)
+                  div.video__comment__top                      
+                    if comment.avatarUrl
                       img(src=`/${comment.avatarUrl}`, alt="")
-                      div.video__comment__info
-                        span=comment.username
-                        span.date=new Date(comment.createdAt).toLocaleDateString("ko-kr", {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'})
-                    span #{comment.text}
-                    if String(loggedInUser._id) === String(comment.owner)
-                      button.deleteBtn ❌
-
+                    else
+                      img(src="/uploads/default.png")
+                    div.video__comment__info
+                      span=comment.username
+                      span.date=new Date(comment.createdAt).toLocaleDateString("ko-kr", {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'})
+                  span #{comment.text}
+                  if String(loggedInUser._id) === String(comment.owner)
+                    button.deleteBtn ❌
 block scripts 
   script(src="/static/js/videoPlayer.js")
   if loggedIn

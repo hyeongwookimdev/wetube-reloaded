@@ -19,7 +19,7 @@ export const postJoin = async (req, res) => {
   if (exists) {
     return res.status(400).render("join", {
       pageTitle,
-      errorMessage: "This username/email is already taken",
+      errorMessage: "This Id/email is already taken",
     });
   }
   try {
