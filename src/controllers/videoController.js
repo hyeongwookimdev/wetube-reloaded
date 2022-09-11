@@ -145,7 +145,6 @@ export const createComment = async (req, res) => {
     text,
     owner: user._id,
     username: user.username,
-    avatarUrl: user.avatarUrl,
     video: id,
   });
 
@@ -154,7 +153,6 @@ export const createComment = async (req, res) => {
   return res.status(201).json({
     newCommentId: comment._id,
     newCommentUsername: comment.username,
-    newCommentAvatarUrl: comment.avatarUrl,
   });
 };
 

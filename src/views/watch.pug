@@ -59,13 +59,7 @@ block content
               each comment in video.comments.reverse()
                 li.video__comment(data-id=comment._id)
                   div.video__comment__top
-
-                    if comment.avatarUrl === undefined
-                      img(src="/img/default.png")
-                    else
-                      img(src=`${comment.avatarUrl}`, alt="")
-                   
-
+                    img(src="/img/default.png")
                     div.video__comment__info
                       span=comment.username
                       span.date=new Date(comment.createdAt).toLocaleDateString("ko-kr", {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'})

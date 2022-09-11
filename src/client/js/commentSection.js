@@ -12,11 +12,7 @@ const addComment = (text, id, username, avatarUrl) => {
   const top = document.createElement("div");
   top.className = "video__comment__top";
   const img = document.createElement("img");
-  if (avatarUrl) {
-    img.src = `${avatarUrl}`;
-  } else {
-    img.src = "/img/default.png";
-  }
+  img.src = "/img/default.png";
   const info = document.createElement("div");
   info.className = "video__comment__info";
   const spanUsername = document.createElement("span");
