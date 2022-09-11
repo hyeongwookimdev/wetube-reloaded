@@ -63,7 +63,7 @@ block content
                     if comment.avatarUrl === undefined
                       img(src="/img/default.png")
                     else
-                      img(src=`${comment.avatarUrl}`, alt="")
+                      img(src=`${comment.avatarUrl.replace("/", "")}`, alt="")
                    
 
                     div.video__comment__info
