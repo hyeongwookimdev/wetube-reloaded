@@ -4,7 +4,6 @@ import {
   postJoin,
   getLogin,
   postLogin,
-  guide,
 } from "../controllers/userController";
 import { home, search } from "../controllers/videoController";
 import { publicOnlyMiddleware } from "../middlewares";
@@ -19,6 +18,5 @@ rootRouter
   .get(getLogin)
   .post(postLogin);
 rootRouter.get("/search", search);
-rootRouter.get("/guide", guide);
 
 export default rootRouter;

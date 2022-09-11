@@ -283,5 +283,3 @@ export const see = async (req, res) => {
     user,
   });
 };
-
-export const guide = (req, res) => res.render("guide");
