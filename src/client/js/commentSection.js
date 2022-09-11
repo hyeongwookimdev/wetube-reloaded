@@ -62,7 +62,6 @@ const handleSubmit = async (event) => {
     textarea.value = "";
     const { newCommentId, newCommentUsername, newCommentAvatarUrl } =
       await response.json();
-    console.log(newCommentId, newCommentUsername, newCommentAvatarUrl);
     addComment(text, newCommentId, newCommentUsername, newCommentAvatarUrl);
   }
 };
